@@ -2,6 +2,9 @@
 #define DEBUG
 #include <Sodaq_RN2483.h>
 
+#define voltageDetector A0
+#define soundSensor A1
+ 
 #define uplinkCnt 10
 
 // LED color customization for all the application
@@ -41,27 +44,8 @@ void setup()
 
   //Set ADC resolution to 12 bits
   analogReadResolution(12) ;
-
-  //Initialize the LEDs and turn them all off
-  pinMode(LED_RED, OUTPUT) ;
-  pinMode(LED_GREEN, OUTPUT) ;
-  pinMode(LED_BLUE, OUTPUT) ;
-
-  digitalWrite(LED_RED, HIGH) ;
-  digitalWrite(LED_GREEN, HIGH) ;
-  digitalWrite(LED_BLUE, HIGH) ;
-
-  // Power Up LED
-  analogWrite(LED_RED,   LED_RED_CUST) ;
-  analogWrite(LED_GREEN, LED_GREEN_CUST) ;
-  analogWrite(LED_BLUE,  LED_BLUE_CUST) ;
   
   delay(10000) ;
-
-  // Turn off the LEDs
-  digitalWrite(LED_RED, HIGH) ;
-  digitalWrite(LED_GREEN, HIGH) ;
-  digitalWrite(LED_BLUE, HIGH) ;
   
 	LoRaBee.setDiag(debugSerial) ; // optional
  
@@ -100,10 +84,11 @@ void setup()
 
 void loop()
 {
-  // Initialize voltage for temperature sensor
+  // Initialize sum, voltage for temperature sensor
   float sum = 0.0;
   float voltage = 0.0;
   float temperature = 0.0;
+
   uint8_t samples = 10 ;
   uint8_t payload[] = {0x00, 0x00, 0x00} ;
   uint8_t data ;
@@ -131,20 +116,26 @@ void loop()
     debugSerial.print(temperature, 1) ;
     debugSerial.println(" C") ;
 
-    if (temperature >= 0)
-    {
-      payload[0] = '+' ;
-    }
-    else
-    {
-      payload[0] = '-' ;
-    }
-
     data = (int)temperature ;
-    payload[2] = '0' + (data % 10) ;
-    data /= 10 ;
-    payload[1] = '0' + (data % 10) ;
+    payload[0] = data;
+
+
+    // put your main code here, to run repeatedly:
+    int sensorValue = analogRead(voltageDetector);
+    float voltage = map(sensorValue, 0, 1023, 0, 5);
+    int output = (voltage >= 5) ? 1 : 0; // if voltage >= 5V, output = 1, else output = 0
+    debugSerial.print("Est allume ?:");
+    debugSerial.println(output);
+
+    payload[1] = output;
+
+
+    int soundValue = analogRead(A1); //read the sound sensor
   
+    debugSerial.print("Valeur du son:");
+    debugSerial.println(soundValue); //print the value of sound sensor
+
+
 		switch (LoRaBee.send(1, payload, 3))
 		{
 		case NoError:
@@ -196,7 +187,7 @@ void loop()
 		}
 
     Serial.println("Bonjour!"); // Envoie "Bonjour!" suivi d'un retour à la ligne
-  delay(1000);
+    delay(1000);
    
 		delay(10000) ;
 	}
@@ -208,4 +199,3 @@ void loop()
 	while (1) 
 	{ } // block forever
 }
-
