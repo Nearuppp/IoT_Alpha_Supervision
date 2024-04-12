@@ -14,9 +14,12 @@ EthernetUDP udp;
 void setup() {
   // Débute la communication série pour le débogage
   Serial.begin(9600);
-  
-  // Initialise l'Ethernet avec l'adresse IP statique
-  Ethernet.begin(ip);
+
+  // Adresse MAC de la carte Ethernet Arduino
+  byte mac[] = { 0xA8, 0x61, 0x0A, 0xAE, 0x94, 0x9B};
+
+  // Initialise l'Ethernet avec l'adresse MAC et l'adresse IP statique
+  Ethernet.begin(mac, ip);
 
   // Débute la communication UDP
   udp.begin(localPort);
@@ -25,13 +28,14 @@ void setup() {
   delay(1000);
 }
 
+
 void loop() {
   // Message à envoyer au switch
   char message[] = "Hello, switch!";
 
   // Envoie du message au switch
   udp.beginPacket(IPAddress(172, 16, 1, 1), 8888); // Remplacez l'adresse IP par celle de votre switch
-  udp.write(message);
+  udp.write(message, strlen(message)); // Correction : ajout de la longueur du message
   udp.endPacket();
 
   // Attente de la réponse du switch
