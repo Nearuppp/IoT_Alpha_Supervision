@@ -1,3 +1,15 @@
+//Pour la sonde
+#include <OneWire.h>
+int DS18S20_Pin = 3; //DS18S20 Signal pin on digital pin 3
+OneWire ds(DS18S20_Pin);  // on digital pin 2
+
+
+// Pour le bouton
+int buttonPin = 6;  // the number of the pushbutton pin
+int ledPin = 7;   // the number of the LED pin
+int buttonState = 0; // variable for reading the pushbutton status
+
+
 // humidité (DH11)
 #include "DHT.h"
 #define DHTPIN 2     // what pin we're connected to
@@ -89,6 +101,9 @@ void setup()
   }
 
   dht.begin();
+
+  pinMode(ledPin, OUTPUT);  // initialize the LED pin as an output:
+  pinMode(buttonPin, INPUT);  // initialize the pushbutton pin as an input:
 }
 
 
@@ -152,6 +167,57 @@ int getvoltage(){
 }
 
 
+int bouton(){
+  buttonState = digitalRead(buttonPin);   // read the state of the pushbutton value:
+  // check if the pushbutton is pressed.
+  // if it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    debugSerial.println("0");
+    return 0;
+  }
+  else {
+    debugSerial.println("1");
+    return 1;
+  }
+}
+
+
+int temp_sonde(){
+  //returns the temperature from one DS18S20 in DEG Celsius 
+  byte data[12];
+  byte addr[8];
+  if ( !ds.search(addr)) {
+      //no more sensors on chain, reset search
+      ds.reset_search();
+      return -1000;
+  } 
+  if ( OneWire::crc8( addr, 7) != addr[7]) {
+      debugSerial.println("CRC is not valid!");
+      return -1000;
+  }
+  if ( addr[0] != 0x10 && addr[0] != 0x28) {
+      debugSerial.print("Device is not recognized");
+      return -1000;
+  }
+  ds.reset();
+  ds.select(addr);
+  ds.write(0x44,1); // start conversion, with parasite power on at the end
+  byte present = ds.reset();
+  ds.select(addr);    
+  ds.write(0xBE); // Read Scratchpad   
+  for (int i = 0; i < 9; i++) { // we need 9 bytes
+    data[i] = ds.read();
+  }
+  ds.reset_search();   
+  byte MSB = data[1];
+  byte LSB = data[0];
+  float tempRead = ((MSB << 8) | LSB); //using two's compliment
+  float TemperatureSum = tempRead / 16;
+
+  return TemperatureSum;
+}
+
+
 void loop()
 {
   // Initialize sum, voltage for temperature sensor
@@ -159,7 +225,7 @@ void loop()
   float voltage = 0.0;
   float temperature = 0.0;
 
-  uint8_t payload[] = {0x00, 0x00, 0x00, 0x00, 0x00};
+  uint8_t payload[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
   uint8_t data ;
   
 	// Send x packets, with at least a 10 seconds delay after each transmission (more seconds if the device is busy)
@@ -174,8 +240,12 @@ void loop()
     payload[2] = son();
 
     payload[3] = humiditer();
+
+    payload[4] = bouton();
+
+    payload[5] = temp_sonde();
   
-		switch (LoRaBee.send(1, payload, 4))
+		switch (LoRaBee.send(1, payload, 6))
 		{
 		case NoError:
 			debugSerial.println("Successful transmission.");
