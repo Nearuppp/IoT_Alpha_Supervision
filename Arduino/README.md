@@ -50,17 +50,3 @@ Ce dossier contient divers schémas et documents relatifs aux projets matériels
 
 ### Utilisation
 Consultez les fichiers de ce dossier pour des informations détaillées sur les schémas matériels et les conceptions de circuits imprimés.
-
-## Contribuer
-
-Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce projet, veuillez suivre ces étapes :
-
-1. Fork le dépôt.
-2. Créez une branche pour votre fonctionnalité (`git checkout -b ma-fonctionnalite`).
-3. Committez vos modifications (`git commit -am 'Ajouter une fonctionnalité'`).
-4. Poussez vers la branche (`git push origin ma-fonctionnalite`).
-5. Créez une Pull Request.
-
-## License
-
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
