@@ -1,0 +1,539 @@
+[
+    {
+        "id": "ac43d0bb20715573",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9ef15cc703b67cbc",
+        "type": "tab",
+        "label": "Flux 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "519aa42b502a7470",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "BDD",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "timeout": "10",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "c221dbebd65fdfc3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "eu1.cloud.thethings.network",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d41c1e10bd0e56b8",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "BDD",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "ab9e2c2b05a18b97",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "808955bc1f4dd7ae",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "808955bc1f4dd7ae",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f79bfee505424b7c",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "7595dd4f822e4df0",
+        "type": "influxdb out",
+        "z": "ac43d0bb20715573",
+        "influxdb": "519aa42b502a7470",
+        "name": "Teste",
+        "measurement": "Test2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "RIOC",
+        "bucket": "Alpha_IoT",
+        "x": 790,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "926d1a484a414b63",
+        "type": "inject",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"temperature\":24},{\"device\":\"dQBgXeWLRE\",\"deviceType\":\"Pi4\",\"deviceName\":\"demo-pi-rob\"}]",
+        "payloadType": "json",
+        "x": 530,
+        "y": 200,
+        "wires": [
+            [
+                "7595dd4f822e4df0",
+                "eb8f9115a2b13a09"
+            ]
+        ]
+    },
+    {
+        "id": "cf0a54a6eeec4085",
+        "type": "mqtt in",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c221dbebd65fdfc3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 370,
+        "y": 380,
+        "wires": [
+            [
+                "4af0de0b41731ff6"
+            ]
+        ]
+    },
+    {
+        "id": "eb8f9115a2b13a09",
+        "type": "debug",
+        "z": "ac43d0bb20715573",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "4af0de0b41731ff6",
+        "type": "function",
+        "z": "ac43d0bb20715573",
+        "name": "msg = playload",
+        "func": "var tempPayload = msg.payload;\n\n// Vérifier que le payload contient les propriétés nécessaires\nif (tempPayload && tempPayload.uplink_message && tempPayload.uplink_message.decoded_payload) {\n    var decodedPayload = tempPayload.uplink_message.decoded_payload;\n\n    var bouton = parseFloat(decodedPayload.bouton);\n    var brancher = parseFloat(decodedPayload.brancher);\n    var humiditer = parseFloat(decodedPayload.humiditer);\n    var sound = parseFloat(decodedPayload.son); // Assurez-vous que c'est bien 'son' et non 'sound'\n    var temp_sonde = parseFloat(decodedPayload.temp_sonde);\n    var temperature = parseFloat(decodedPayload.temperature);\n    \n    // Regrouper toutes les valeurs dans un seul objet et inclure la date\n    msg.payload = {\n        \"bouton\": bouton,\n        \"brancher\": brancher,\n        \"humiditer\": humiditer,\n        \"sound\": sound,\n        \"temp_sonde\": temp_sonde,\n        \"temperature\": temperature\n    };\n} else {\n    // Si le payload ne contient pas les propriétés nécessaires, générer une erreur pour faciliter le débogage\n    node.error(\"Le payload ne contient pas les propriétés nécessaires\", msg);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 380,
+        "wires": [
+            [
+                "23377ede5d91ea0d",
+                "9dc583158ee3d2c5"
+            ]
+        ]
+    },
+    {
+        "id": "23377ede5d91ea0d",
+        "type": "debug",
+        "z": "ac43d0bb20715573",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "8918d93b297a66ba",
+        "type": "function",
+        "z": "ac43d0bb20715573",
+        "name": "function 1",
+        "func": "var tempPayload = msg.payload;\nvar tempValues = tempPayload.split(\",\"); // Séparer les valeurs par la virgule\n\n// Extraire les valeurs de température et de setTemp\nvar bouton = parseFloat(tempValues[0]);\nvar brancher = parseFloat(tempValues[1]);\nvar humiditer = parseFloat(tempValues[2]);\nvar sound = parseFloat(tempValues[3]);\nvar temp_sonde = parseFloat(tempValues[4]);\nvar temperature = parseFloat(tempValues[5]);\n\nmsg.payload = {\n        \"bouton\": bouton,\n        \"brancher\": brancher,\n        \"humiditer\": humiditer,\n        \"sound\": sound,\n        \"temp_sonde\": temp_sonde,\n        \"temperature\": temperature\n    };\n    \nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 540,
+        "wires": [
+            [
+                "281108c68524837b",
+                "ba4b256844a4e152",
+                "8a5398589ff36aa1",
+                "823fdda44653d65a",
+                "b742840a19e7a5ac"
+            ]
+        ]
+    },
+    {
+        "id": "8a5398589ff36aa1",
+        "type": "function",
+        "z": "ac43d0bb20715573",
+        "name": "function 2",
+        "func": "msg.payload = msg.setTemp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 720,
+        "wires": [
+            [
+                "74f4a7daedd3054a"
+            ]
+        ]
+    },
+    {
+        "id": "74f4a7daedd3054a",
+        "type": "ui_slider",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "ab9e2c2b05a18b97",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "5",
+        "max": "25",
+        "step": "0.5",
+        "x": 810,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "281108c68524837b",
+        "type": "ui_gauge",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "group": "ab9e2c2b05a18b97",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Température",
+        "label": "°C",
+        "format": "{{msg.temperature}}",
+        "min": "5",
+        "max": "30",
+        "colors": [
+            "#99c1f1",
+            "#57e389",
+            "#f66151"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 810,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "ba4b256844a4e152",
+        "type": "ui_gauge",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "group": "ab9e2c2b05a18b97",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Consigne",
+        "label": "°C",
+        "format": "{{msg.setTemp}}",
+        "min": 0,
+        "max": "25",
+        "colors": [
+            "#62a0ea",
+            "#f6d32d",
+            "#f66151"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 800,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "823fdda44653d65a",
+        "type": "ui_gauge",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "group": "ab9e2c2b05a18b97",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Luminosité",
+        "label": "%",
+        "format": "{{msg.luminosite}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 810,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "b742840a19e7a5ac",
+        "type": "ui_gauge",
+        "z": "ac43d0bb20715573",
+        "name": "",
+        "group": "ab9e2c2b05a18b97",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "gauge",
+        "label": "dB",
+        "format": "{{msg.sound}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 790,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "9dc583158ee3d2c5",
+        "type": "influxdb out",
+        "z": "ac43d0bb20715573",
+        "influxdb": "519aa42b502a7470",
+        "name": "Teste",
+        "measurement": "Test3",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "RIOC",
+        "bucket": "Alpha_IoT",
+        "x": 790,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "54070b418bc47bca",
+        "type": "mqtt in",
+        "z": "9ef15cc703b67cbc",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c221dbebd65fdfc3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 260,
+        "wires": [
+            [
+                "02d5aa935227e982"
+            ]
+        ]
+    },
+    {
+        "id": "02d5aa935227e982",
+        "type": "debug",
+        "z": "9ef15cc703b67cbc",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    }
+]

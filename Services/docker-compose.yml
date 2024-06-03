@@ -1,44 +1,47 @@
-version: "3"
-
+version: '2'
 services:
-  influxdb:
-    image: influxdb:2.1.1
-    volumes:
-      - ./influxdb-storage:/var/lib/influxdb2:rw
-    env_file:
-      - .env
-    entrypoint: ["./entrypoint.sh"]
-    restart: on-failure:10
-    ports:
-      - ${DOCKER_INFLUXDB_INIT_PORT}:8086
-
-  telegraf:
-    image: telegraf:1.19
-    volumes:
-      - ${TELEGRAF_CFG_PATH}:/etc/telegraf/telegraf.conf:rw
-    env_file:
-      - .env
+  nodered:
     depends_on:
-      - influxdb
-
-  grafana:
-    image: grafana/grafana-oss:8.4.3
-    user: "1000:1000" # Ajout de l'utilisateur et du groupe
-    volumes:
-      - ./grafana-storage:/var/lib/grafana:rw
-    depends_on:
-      - influxdb
+      - grafana
+    image: nodered/node-red:latest
+    environment:
+      - TZ=America/Bogota
     ports:
-      - ${GRAFANA_PORT}:3000
+      - "1880:1880"
+    user: "1000:1000"  # UID:GID doit être une chaîne
+    volumes:
+      - ./nodered:/data
   
-  node_red:
-    image: nodered/node-red:3.1
-    user: "1000:1000" # Ajout de l'utilisateur et du groupe
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - '8086:8086'
+    user: "1000:1000"  # UID:GID doit être une chaîne
     volumes:
-      - ./node_red:/data:rw
-    ports:  
-      - ${DOCKER_NODERED_INIT_PORT}:1880
+      - ./influxdb:/var/lib/influxdb2:rw
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+      - DOCKER_INFLUXDB_INIT_RETENTION=${INFLUXDB_BUCKET_RETENTION}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN}
+    # Li9QQhJkhiYRPhWxAncWzjDwFIrNVwIW9cVO3bQ0QfMcQD6HnIf-v5JgP3HUdiwTMwu_qWCMcg16ZBOsMfwvfA==
+  
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3000:3000'
+    user: "1000:1000"  # UID:GID doit être une chaîne
+    volumes:
+      - ./grafana/data/:/var/lib/grafana:rw
+      - ./grafana/logs/:/var/log/grafana:rw
+      - ./grafana/plugins/:/var/lib/grafana/plugins:rw
+      - ./grafana/provisioning/:/etc/grafana/provisioning:rw
 
-volumes:
-  grafana-storage:
-  influxdb-storage:
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
