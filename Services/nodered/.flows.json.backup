@@ -486,7 +486,7 @@
         "z": "ac43d0bb20715573",
         "influxdb": "519aa42b502a7470",
         "name": "Teste",
-        "measurement": "Test3",
+        "measurement": "Test",
         "precision": "",
         "retentionPolicy": "",
         "database": "database",

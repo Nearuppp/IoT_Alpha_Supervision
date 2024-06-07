@@ -5,8 +5,7 @@ OneWire ds(DS18S20_Pin);  // on digital pin 2
 
 
 // Pour le bouton
-int buttonPin = 6;  // the number of the pushbutton pin
-int ledPin = 7;   // the number of the LED pin
+int buttonPin = 12;  // the number of the pushbutton pin
 int buttonState = 0; // variable for reading the pushbutton status
 
 
@@ -102,7 +101,6 @@ void setup()
 
   dht.begin();
 
-  pinMode(ledPin, OUTPUT);  // initialize the LED pin as an output:
   pinMode(buttonPin, INPUT);  // initialize the pushbutton pin as an input:
 }
 
@@ -213,6 +211,9 @@ int temp_sonde(){
   byte LSB = data[0];
   float tempRead = ((MSB << 8) | LSB); //using two's compliment
   float TemperatureSum = tempRead / 16;
+
+  debugSerial.print("temp_sonde:");
+  debugSerial.println(TemperatureSum);
 
   return TemperatureSum;
 }
