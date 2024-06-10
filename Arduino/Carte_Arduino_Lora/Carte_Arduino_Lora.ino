@@ -297,15 +297,11 @@ void loop()
 		}
 
     Serial.println("Bonjour!"); // Envoie "Bonjour!" suivi d'un retour à la ligne
-    delay(1000);
    
-		delay(10000) ;
+		delay(60000) ;
 	}
  
   debugSerial.println("End!");
 
   //LoRaBee.sleep() ;
- 
-	while (1) 
-	{ } // block forever
 }

@@ -45,3 +45,14 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+  
+  html-server:
+    image: python:3.9-slim
+    depends_on:
+      - grafana
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./dashbord:/app
+    working_dir: /app
+    command: ["python", "-m", "http.server", "8000"]
